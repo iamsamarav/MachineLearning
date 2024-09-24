@@ -34,3 +34,5 @@ def aprendeAtualiza():
                 pesos[j] = pesos[j] + (taxaAprendizado * entradas[i][j] * erro)
                 print('Pesos Atualizados>' + str(pesos[j]))
         print('Total de Erros: ' + str(erroTotal))
+        
+aprendeAtualiza()
