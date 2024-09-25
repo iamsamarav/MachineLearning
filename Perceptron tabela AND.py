@@ -22,6 +22,8 @@ def calculoSaida(reg):
     s = reg.dot(pesos)
     return stepFunction(s)
 
+#Função destinada a tratar os valores dos pesos através do comparativo entre
+
 def aprendeAtualiza():
     erroTotal = 1
     while (erroTotal != 0):
