@@ -9,5 +9,26 @@ entradas = np.array([[0,0],
 
 saidas = np.array([[0],[1],[1],[0]])
 
+pesos0 = np.array([[-0.424,-0.740,-0.961],
+                   [0.358,-0.577,-0.469]])
+pesos1 = np.array([[-0.017],[-0.893],[0.148]])
 
+ntreinos = 100
+taxaAprendizado = 0.3
+momentum = 1
+
+def sigmoid(soma):
+        return 1/(1+ np.exp(-soma))
+    
+for i in range(ntreinos):
+    camadaEntrada = entradas
+    somaSinapse0 = np.dot(camadaEntrada, pesos0)
+    camadaOculta = sigmoid(somaSinapse)
+    
+    somaSinapse1 = np.dot(camadaOculta, pesos1)
+    camadaSaida = sigmoid(somaSinapse1)
+    
+    erroCamadaSaida = saidas - camadaSaida
+    mediaAbsoluta = np.mean(np.abs(erroCamadaSaida))
+    
 
