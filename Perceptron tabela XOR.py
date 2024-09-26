@@ -43,3 +43,11 @@ deltaSaida = erroCamadaSaida * derivadaSaida
 pesos1Transposta = pesos1.T
 deltaSaidaXpesos = deltaSaida.dot(pesos1Transposta)
 deltaCamadaOculta = deltaSaidaXpesos * sigmoideDerivada(camadaOculta)
+
+camadaOcultaTransposta = camadaOculta.T
+pesos3 = camadaOcultaTransposta.dot(deltaSaida)
+pesos1 = (pesos1 * momentum) + (pesos3 * taxaAprendizado)
+
+camadaEntradaTransposta = camadaEntrada.T
+pesos4 = camadaEntradaTransposta.dot(deltaCamadaOculta)
+pesos0 = (pesos0 * momentum) + (pesos4 * taxaAprendizado)
