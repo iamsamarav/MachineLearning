@@ -23,7 +23,7 @@ def sigmoid(soma):
 for i in range(ntreinos):
     camadaEntrada = entradas
     somaSinapse0 = np.dot(camadaEntrada, pesos0)
-    camadaOculta = sigmoid(somaSinapse)
+    camadaOculta = sigmoid(somaSinapse0)
     
     somaSinapse1 = np.dot(camadaOculta, pesos1)
     camadaSaida = sigmoid(somaSinapse1)
