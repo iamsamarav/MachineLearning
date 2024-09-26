@@ -19,6 +19,9 @@ momentum = 1
 
 def sigmoid(soma):
         return 1/(1+ np.exp(-soma))
+        
+def sigmoideDerivada(sig):
+    return sig * (1-sig)
     
 for i in range(ntreinos):
     camadaEntrada = entradas
@@ -31,4 +34,12 @@ for i in range(ntreinos):
     erroCamadaSaida = saidas - camadaSaida
     mediaAbsoluta = np.mean(np.abs(erroCamadaSaida))
     
+sigDerivada = sigmoid(0.5)
+sigDerivada1 = sigmoideDerivada(sigDerivada)
 
+derivadaSaida = sigmoideDerivada(camadaSaida)
+deltaSaida = erroCamadaSaida * derivadaSaida
+
+pesos1Transposta = pesos1.T
+deltaSaidaXpesos = deltaSaida.dot(pesos1Transposta)
+deltaCamadaOculta = deltaSaidaXpesos * sigmoideDerivada(camadaOculta)
