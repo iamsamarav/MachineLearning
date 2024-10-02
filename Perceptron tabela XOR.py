@@ -13,7 +13,7 @@ pesos0 = np.array([[-0.424,-0.740,-0.961],
                    [0.358,-0.577,-0.469]])
 pesos1 = np.array([[-0.017],[-0.893],[0.148]])
 
-ntreinos = 100
+ntreinos = 1000000
 taxaAprendizado = 0.3
 momentum = 1
 
@@ -34,20 +34,20 @@ for i in range(ntreinos):
     erroCamadaSaida = saidas - camadaSaida
     mediaAbsoluta = np.mean(np.abs(erroCamadaSaida))
     
-sigDerivada = sigmoid(0.5)
-sigDerivada1 = sigmoideDerivada(sigDerivada)
+    derivadaSaida = sigmoideDerivada(camadaSaida)
+    deltaSaida = erroCamadaSaida * derivadaSaida
 
-derivadaSaida = sigmoideDerivada(camadaSaida)
-deltaSaida = erroCamadaSaida * derivadaSaida
+    pesos1Transposta = pesos1.T
+    deltaSaidaXpesos = deltaSaida.dot(pesos1Transposta)
+    deltaCamadaOculta = deltaSaidaXpesos * sigmoideDerivada(camadaOculta)
 
-pesos1Transposta = pesos1.T
-deltaSaidaXpesos = deltaSaida.dot(pesos1Transposta)
-deltaCamadaOculta = deltaSaidaXpesos * sigmoideDerivada(camadaOculta)
+    camadaOcultaTransposta = camadaOculta.T
+    pesos3 = camadaOcultaTransposta.dot(deltaSaida)
+    pesos1 = (pesos1 * momentum) + (pesos3 * taxaAprendizado)
 
-camadaOcultaTransposta = camadaOculta.T
-pesos3 = camadaOcultaTransposta.dot(deltaSaida)
-pesos1 = (pesos1 * momentum) + (pesos3 * taxaAprendizado)
+    camadaEntradaTransposta = camadaEntrada.T
+    pesos4 = camadaEntradaTransposta.dot(deltaCamadaOculta)
+    pesos0 = (pesos0 * momentum) + (pesos4 * taxaAprendizado)
+    print('Margem de Erro:' +str(mediaAbsoluta))
 
-camadaEntradaTransposta = camadaEntrada.T
-pesos4 = camadaEntradaTransposta.dot(deltaCamadaOculta)
-pesos0 = (pesos0 * momentum) + (pesos4 * taxaAprendizado)
+
