@@ -53,6 +53,19 @@ def reduzpalavras(texto): #Faz-se a remoção do sufixo extraindo o radical da p
         frases_redux.append((reduzidas, emocao))
     return frases_redux
 
+def buscapalavras(frases):
+    todaspalavras = []
+    for (palavras,emocao) in frases:
+        todaspalavras.extend(palavras)
+    return todaspalavras
+
+def buscafrequencia(palavras):
+    freq_palavras = nltk.FreqDist(palavras)
+    return freq_palavras
+
 frases_reduzidas = reduzpalavras(base)
+palavras = buscapalavras(frases_reduzidas)
+frequencia = buscafrequencia(palavras)
+
 
 
