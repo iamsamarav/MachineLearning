@@ -1,4 +1,5 @@
 from sklearn.datasets import load_iris
+from sklearn.neighbors import KNeighborsClassifier
 
 base = load_iris()
 print(base.data) #Retorno das medições
@@ -7,10 +8,20 @@ print(base.target_names) #Nomes da classificação
 
 entrada = base.data
 saidas = base.target
-rotulos = base.target
+rotulos = base.target_names
 
 #Tamanho das matrizes
 
 print(base.data.shape)
 print(base.target.shape)
+
+#Aplicando o modelo KNN -> Proximidade de K
+
+knn = KNeighborsClassifier(n_neighbors=1) #Proximidade de um número quanto a amostra vizinha
+knn.fit(entrada, saidas) #Alimenta o processador
+especie = knn.predict([[5.9,3,5.1,1.8]])[0] #Previsão
+print(especie)
+rotulos[especie]
+
+
 
