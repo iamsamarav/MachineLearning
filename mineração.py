@@ -63,9 +63,30 @@ def buscafrequencia(palavras):
     freq_palavras = nltk.FreqDist(palavras)
     return freq_palavras
 
+def buscapalavrasunicas(frequencia):
+    freq = frequencia.keys()
+    return freq
+
+def extrator(documento):
+    doc = set(documento)
+    caracteristicas = {}
+    for palavra in palavrasunicas:
+        caracteristicas['%s' % palavra] = (palavra in doc)
+    return caracteristicas
+    
 frases_reduzidas = reduzpalavras(base)
 palavras = buscapalavras(frases_reduzidas)
 frequencia = buscafrequencia(palavras)
+palavrasunicas = buscapalavrasunicas(frequencia)
+baseprocessada = nltk.classify.apply_features(extrator, frases_reduzidas)
+classificador = nltk.NaiveBayesClassifier.train(baseprocessada)
 
+teste = str(input('Digite como você está se sentindo: '))
+teste_redux = []
+redux = nltk.stem.RSLPStemmer()
+for (palavras_treino) in teste.split():
+    reduzida = [p for p in palavras_treino.split()]
+    teste_redux.append(str(redux.stem(reduzida[0])))
 
-
+resultado = extrator(teste_redux)
+print(classificador.classify(resultado))Ss
