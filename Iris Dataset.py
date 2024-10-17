@@ -23,5 +23,12 @@ especie = knn.predict([[5.9,3,5.1,1.8]])[0] #Previsão
 print(especie)
 rotulos[especie]
 
+#Aplicando treino e teste
+
+etreino, eteste, streino, steste = train_test_split(entrada, saidas, test_size = 0.25)
+
+knn.fit(etreino, streino)
+previsor = knn.predict(eteste)
+
 
 
