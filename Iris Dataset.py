@@ -1,5 +1,7 @@
 from sklearn.datasets import load_iris
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
 
 base = load_iris()
 print(base.data) #Retorno das medições
@@ -29,6 +31,10 @@ etreino, eteste, streino, steste = train_test_split(entrada, saidas, test_size =
 
 knn.fit(etreino, streino)
 previsor = knn.predict(eteste)
+
+#Metricas avaliativos de um rede neural
+
+margem_acertos = metrics.accuracy_score(steste, previsor)
 
 
 
