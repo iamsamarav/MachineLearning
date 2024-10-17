@@ -3,6 +3,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
 import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
 
 base = load_iris()
 print(base.data) #Retorno das medições
@@ -50,9 +51,16 @@ while k < 25:
     k +=1
     
 plt.plot(list(valores_k.keys()),list(valores_k.values()))
+plt.xlabel('Valores de k')
+plt.ylabel('Performance')
+plt.show()
+
+#Aplicando Regressão Logística
+
+#Previsões categóricas
 
 
-
-
-
-
+regl = LogisticRegression()
+regl.fit(etreino, streino)
+vr = regl.predict([[6.2,3.4,5.4,2.3]])
+vr2 = regl.predict_proba([[6.2,3.4,5.4,2.3]])
