@@ -59,8 +59,9 @@ plt.show()
 
 #Previsões categóricas
 
-
 regl = LogisticRegression()
 regl.fit(etreino, streino)
-vr = regl.predict([[6.2,3.4,5.4,2.3]])
-vr2 = regl.predict_proba([[6.2,3.4,5.4,2.3]])
+reg = regl.predict([[6.2,3.4,5.4,2.3]]) #Retorna o resultado mais provável
+regproba = regl.predict_proba([[6.2,3.4,5.4,2.3]]) #Retorna todas as probabilidades
+previsor_regl = regl.predict(eteste)
+margem_acertos_regl = metrics.accuracy_score(steste, previsor_regl)
